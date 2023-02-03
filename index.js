@@ -3,27 +3,17 @@ import { JSDOM } from "jsdom";
 
 const URL = "https://www.flowstate.fm/p/sadao-watanabe";
 const QUERY = {
-	element: "a",
-	search_mode: 0,
-	search_term: "Spotify",
+	search_element: "a",
+	search_mode: 1,
+	search_term: "Save",
+	attribute: "href",
 };
+
+// EXTRACT_ELEMENT(BODY, QUERY, true);
 
 got(URL)
 	.then((response) => {
-		let htmlString = String(response.body);
-		htmlString = getHtmlElementAsString("body", htmlString);
-		htmlString = setParentElementOfHtmlString("html", htmlString);
-		htmlString = addHtmlDoctype(htmlString);
-
-		const dom = new JSDOM(htmlString);
-		dom.window.document.querySelectorAll(QUERY.element).forEach((element) => {
-			if (
-				matchesSearch(element.textContent, QUERY.search_mode, QUERY.search_term)
-			) {
-				const href = element.href;
-				console.log(href);
-			}
-		});
+		EXTRACT_ELEMENT(response.body, QUERY);
 	})
 	.catch((error) => {
 		console.error(error);
@@ -79,14 +69,6 @@ function addHtmlDoctypeToHtmlString(html) {
 
 	return htmlString;
 }
-
-function htmlStringToDom(string) {
-	const dom = new JSDOM(string);
-	return dom;
-}
-
-function getDomElementArray(dom, queryElement, queryMode, queryTerm) {
-	const elementArray = [];
 
 function matchesSearch(string, searchMode, searchValue) {
 	const returnAll =
