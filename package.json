@@ -1,6 +1,6 @@
 {
 	"name": "html-webpage-extraction",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"description": "HTML webpage content extraction",
 	"main": "index.js",
 	"scripts": {
