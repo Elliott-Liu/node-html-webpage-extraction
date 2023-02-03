@@ -1,16 +1,17 @@
 {
-  "name": "html-webpage-extraction",
-  "version": "1.0.0",
-  "description": "HTML webpage content extraction",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "got": "^12.5.3",
-    "jsdom": "^21.1.0"
-  },
-  "type": "module"
+	"name": "html-webpage-extraction",
+	"version": "1.0.0",
+	"description": "HTML webpage content extraction",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node ."
+	},
+	"author": "Elliott Liu",
+	"license": "ISC",
+	"dependencies": {
+		"got": "^12.5.3",
+		"jsdom": "^21.1.0"
+	},
+	"type": "module"
 }
