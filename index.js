@@ -63,7 +63,7 @@ function setParentElementOfHtmlString(tag, html) {
 	const endTag = `</${tag}>`;
 
 	let nestTagContent;
-	nestTagContent += startTag;
+	nestTagContent = startTag;
 	nestTagContent += htmlString;
 	nestTagContent += endTag;
 
