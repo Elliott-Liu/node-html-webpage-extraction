@@ -80,6 +80,40 @@ function addHtmlDoctypeToHtmlString(html) {
 	return htmlString;
 }
 
+	dom.window.document.querySelectorAll(queryElement).forEach((element) => {
+		if (matchesSearch(element.textContent, queryMode, queryTerm)) {
+			elementArray.push(element);
+		}
+	});
+
+	if (elementArray.length !== 0) {
+		return elementArray;
+	}
+
+	return new Error("No search results were found.");
+}
+
+function getElementAttribute(element, attribute) {
+	const attributeOptions = element.getAttributeNames();
+
+	if (attributeOptions.includes(attribute)) {
+		return element.getAttribute(attribute);
+	}
+
+	if (attribute === "textContent") {
+		return element.textContent;
+	}
+
+	attributeOptions.push("textContent");
+	attributeOptions.sort((a, b) => a > b);
+
+	return new Error(
+		`No attribute of the name "${attribute}" exits. Valid option(s) include: "${attributeOptions.join(
+			'", "'
+		)}".`
+	);
+}
+
 function matchesSearch(string, searchMode, searchValue) {
 	const returnAll =
 		searchValue === "" ||
