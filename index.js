@@ -30,14 +30,24 @@ got(URL)
 	});
 
 // TODO ADD ERROR HANDLING FOR NO TAG FOUND
-function getHtmlElementAsString(tag, html) {
+function getHtmlElementAsString(tag, tagOccurance, html) {
 	let htmlString = String(html);
 
-	const startTag = `<${tag}>`;
-	const endTag = `</${tag}>`;
-
+	const startTagBeginning = `<${tag}`;
+	const startTagEnding = ">";
+	const htmlTagStartIndexBeginning = htmlString.indexOf(startTagBeginning);
+	const htmlTagStartIndexEnding =
+		htmlString.indexOf(startTagEnding, htmlTagStartIndexBeginning) + 1;
+	const startTag = htmlString.substring(
+		htmlTagStartIndexBeginning,
+		htmlTagStartIndexEnding
+	);
 	const htmlTagStartIndex = htmlString.indexOf(startTag);
-	const htmlTagEndIndex = htmlString.indexOf(endTag) + endTag.length;
+
+	const endTag = `</${tag}>`;
+	const htmlTagEndIndex =
+		htmlString.indexOf(endTag, htmlTagStartIndex) + endTag.length;
+
 	const htmlTagString = htmlString.substring(
 		htmlTagStartIndex,
 		htmlTagEndIndex
