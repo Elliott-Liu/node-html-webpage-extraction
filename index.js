@@ -61,7 +61,7 @@ function setParentElementOfHtmlString(tag, html) {
 }
 
 // TODO ADD ERROR HANDLING FOR IF ALREADY EXISTS
-function addHtmlDoctype(html) {
+function addHtmlDoctypeToHtmlString(html) {
 	let htmlString;
 
 	htmlString = "<!DOCTYPE html>";
