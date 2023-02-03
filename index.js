@@ -19,6 +19,43 @@ got(URL)
 		console.error(error);
 	});
 
+function EXTRACT_ELEMENT(htmlString, queryParameters, isBase64 = false) {
+	let content = htmlString;
+
+	if (isBase64) {
+		content = base64ToString(content);
+	}
+
+	content = getHtmlElementAsString("body", 0, content);
+	content = setParentElementOfHtmlString("html", content);
+	content = addHtmlDoctypeToHtmlString(content);
+	content = htmlStringToDom(content);
+	content = getDomElementArray(
+		content,
+		queryParameters.search_element,
+		queryParameters.search_mode,
+		queryParameters.search_term
+	);
+
+	const valueArray = [];
+
+	content.forEach((element) => {
+		const attributeValue = getElementAttribute(
+			element,
+			queryParameters.attribute
+		);
+		valueArray.push(attributeValue);
+	});
+
+	console.log(valueArray);
+}
+
+function base64ToString(base64) {
+	const buffer = Buffer.from(base64, "base64");
+	const string = buffer.toString("ascii");
+	return string;
+}
+
 // TODO ADD ERROR HANDLING FOR NO TAG FOUND
 function getHtmlElementAsString(tag, tagOccurance, html) {
 	let htmlString = String(html);
