@@ -2,10 +2,10 @@ import { got } from "got";
 import { JSDOM } from "jsdom";
 
 const URL = "https://www.flowstate.fm/p/sadao-watanabe";
-const EXTRACTION = {
+const QUERY = {
 	element: "a",
-	search_mode: 5,
-	search_term: "Hi",
+	search_mode: 0,
+	search_term: "Spotify",
 };
 
 got(URL)
@@ -16,20 +16,14 @@ got(URL)
 		htmlString = addHtmlDoctype(htmlString);
 
 		const dom = new JSDOM(htmlString);
-		dom.window.document
-			.querySelectorAll(EXTRACTION.element)
-			.forEach((element) => {
-				if (
-					matchesSearch(
-						element.textContent,
-						EXTRACTION.search_mode,
-						EXTRACTION.search_term
-					)
-				) {
-					const href = element.href;
-					console.log(href);
-				}
-			});
+		dom.window.document.querySelectorAll(QUERY.element).forEach((element) => {
+			if (
+				matchesSearch(element.textContent, QUERY.search_mode, QUERY.search_term)
+			) {
+				const href = element.href;
+				console.log(href);
+			}
+		});
 	})
 	.catch((error) => {
 		console.error(error);
